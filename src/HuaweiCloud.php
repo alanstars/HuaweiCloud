@@ -99,7 +99,6 @@ class HuaweiCloud
      * @return array
      */
     private function requestData(){
-        var_dump($this->option);
         $data = [
             'http' => [
                 'method' => 'POST', // 请求方法为POST
