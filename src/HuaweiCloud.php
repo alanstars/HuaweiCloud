@@ -48,7 +48,7 @@ class HuaweiCloud
      * 额外设置
      * @var null
      */
-    private $option = null;
+    private $option = false;
     /**
      * 拼接真实请求数据
      * @var null
@@ -57,7 +57,7 @@ class HuaweiCloud
     /**
      * Version of HuaweiCloud
      */
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
     /**
      * 华为接口请求域名
      */
@@ -69,8 +69,11 @@ class HuaweiCloud
      * @param $appKey       应用AppKey
      * @param $appSecret    应用appsecret
      */
-    public function __construct($appKey,$appSecret)
+    public function __construct($appKey='',$appSecret='',$domian = '')
     {
+        if(!empty($domian)){
+            $this->domian = $domian;
+        }
         if(!empty($appKey) && !empty($appSecret)){
             $this->appKey = $appKey;
             $this->appSecret = $appSecret;
@@ -79,8 +82,11 @@ class HuaweiCloud
             //设置完整请求参数
             $this->requestData = $this->requestData();
             if(empty($this->option)){
-                $this->option= ['ignore_errors'=>true,'ssl'=>false];
+                $this->option= false;
             }
+        }else{
+            echo "未设置appKey或appSecret";
+            die;
         }
     }
 
@@ -103,15 +109,15 @@ class HuaweiCloud
             'http' => [
                 'method' => 'POST', // 请求方法为POST
                 'header' => $this->header,
-                'content' => $this->data,
-                'ignore_errors' => true // 获取错误码,方便调测
+                'content' => json_encode($this->data),
+                'ignore_errors' => true // 返回json格式
             ],
             'ssl' => [
                 'verify_peer' => false,
                 'verify_peer_name' => false
             ] // 为防止因HTTPS证书认证失败造成API调用失败,需要先忽略证书信任问题
         ];
-        if($this->option['ssl']){
+        if($this->option){
             $data['ssl'] = [
                 'verify_peer' => true,
                 'verify_peer_name' => true
@@ -160,6 +166,10 @@ class HuaweiCloud
      * @return $this
      */
     public function uri($uri){
+        $uri = trim($uri);
+        if(strpos($uri,'/') !== 0){
+            $uri = '/'.trim($uri);
+        }
         $this->uri = $uri;
         return $this;
     }
@@ -169,19 +179,18 @@ class HuaweiCloud
      * @return $this
      */
     public function data($data = []){
-        $this->data = json_encode($data);
+        $this->data = $data;
         return $this;
     }
 
     /**
-     * 设置额外配置参数，默认为false
-     * 格式为：['ignore_errors'=>true,'ssl'=>false]
+     * 设置额外配置参数，是否开启ssl，默认为false
      *
      * @param array $option
      * @return $this
      */
-    public function option($option){
-            $this->option = $option;
+    public function option($option = false){
+        $this->option = $option;
         return $this;
     }
 }
