@@ -1,0 +1,29 @@
+{
+    "name": "coolelephant/huaweicloud",
+    "description": "Huawei cloud api,华为SDK通用接口",
+    "keywords": ["uawei cloud SDK","uawei cloud API","华为云SDK","华为云API"],
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "ext-fileinfo": "*",
+        "ext-openssl": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ALan",
+            "email": "zhangweili@kuxiangkj.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "CoolElephant\\HuaweiYun\\": "src/"
+      }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CoolElephant\\HuaweiYun\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev"
+}
