@@ -2,8 +2,9 @@
 华为云接口封装，支持华为云平台通用接口
 
 ## 安装方法
+```
 composer require coolelephant/huaweicloud
-
+```
 ## 使用方法
 本方法支持命名空间，如您的项目支持自动加载，直接实例化即可
 ```
