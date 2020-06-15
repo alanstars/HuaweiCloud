@@ -90,6 +90,10 @@ class HuaweiCloud
         }
     }
 
+    /**
+     * 执行请求，并返回结果
+     * @return bool|\Exception|string
+     */
     public function request(){
         try{
             $response = file_get_contents($this->domian.$this->uri,false,stream_context_create($this->requestData));
