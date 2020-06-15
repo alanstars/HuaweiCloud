@@ -66,8 +66,9 @@ class HuaweiCloud
     /**
      * 初始化 SDK，并传入账号密码
      * HuaweiCloud constructor.
-     * @param $appKey       应用AppKey
-     * @param $appSecret    应用appsecret
+     * @param string $appKey       应用AppKey
+     * @param string $appSecret    应用appsecret
+     * @param string $domian       如果请求不是默认的域名，请自定义传入
      */
     public function __construct($appKey='',$appSecret='',$domian = '')
     {
