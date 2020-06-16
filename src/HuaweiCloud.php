@@ -81,7 +81,7 @@ class HuaweiCloud
             //设置header头
             $this->header = $this->buildWsseHeader();
         }else{
-            echo "未设置appKey或appSecret";
+            return ['resultcode'=>4001,"resultdesc"=>'appKey或appSecret为空'];
             die;
         }
     }
@@ -95,9 +95,10 @@ class HuaweiCloud
         $this->requestData = $this->requestData();
         try{
             $response = file_get_contents($this->domian.$this->uri,false,stream_context_create($this->requestData));
-            return $response;
+            return json_decode($response,true);
         }catch (\Exception $e){
             return $e;
+//            echo $e->getMessage();
         }
 
     }
@@ -148,7 +149,9 @@ class HuaweiCloud
             ];
             return $headers;
         }else{
-            return '未设置appKey或appSecret';
+//            return '未设置appKey或appSecret';
+            return ['resultcode'=>4001,"resultdesc"=>'appKey或appSecret为空'];
+
         }
     }
 
