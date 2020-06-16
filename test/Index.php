@@ -13,7 +13,17 @@
 // | Desc: 
 // +----------------------------------------------------------------------
 require_once('../vendor/autoload.php');
-
-$huawei = new \CoolElephant\HuaweiYun\HuaweiCloud('a1d1f50cad21415fbdd13d8f53d36d60','cfc881cc704c4fba8d8fef5788e03e6b');
-$response = $huawei->option(['ignore_errors'=>true,'ssl'=>false])->uri('/rest/caas/relationnumber/partners/v1.0')->method('POST')->data([])->request();
+$data = [
+    "callerNum" =>  "+8618600881111",   //A号码
+    "relationNum"   =>  "16558942222",    //若指定X号码，areaCode将失效
+    "areaCode"  =>  "北京",   //若不指定号码，将从指定的城市中随机选择
+    "areaMatchMode" => 0,   //号码筛选方式,携带该参数时，必须同时携带areaCode
+    "calleeNum" =>  "+861861111753333", // B号码
+    "callDirection" => 0,   //表示该绑定关系允许的呼叫方向,0:默认双方都可发起呼叫；1:只允许A呼叫B；2:只允许B呼叫A
+    "duration"  =>  120,    //绑定关系保持时间，单位秒。取值范围：0~7776000（90天）绑定关系过期后会被系统自动解除。如果不携带该参数或携带为0，系统默认永不过期。
+    "recordFlag" => true,   //是否需要通话录音，默认不录音，
+    "maxDuration" => 1     //允许单次通话的最长时间，单位分钟，通话时间从接通被叫的时刻开始计算默认为0。取值范围：0~1440。0：系统不主动结束通话，由主被叫双方结束通话。
+];
+$huawei = new \CoolElephant\HuaweiYun\HuaweiCloud('22D0rjj8hL93JBQ6JPMB8U6w0','3zNVk27J0ivC7W76rxnj889');
+$response = $huawei->uri('/rest/caas/relationnumber/partners/v1.0')->method('POST')->data($data)->request();
 var_dump($response);

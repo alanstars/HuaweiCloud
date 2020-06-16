@@ -33,7 +33,7 @@ class HuaweiCloud
      * 请求方法：POST,GET,DELETE,PUT等
      * @var null
      */
-    private $method = null;
+    private $method = "POST";
     /**
      * 请求body数据，即请求参数
      * @var null
@@ -57,7 +57,7 @@ class HuaweiCloud
     /**
      * Version of HuaweiCloud
      */
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.3';
     /**
      * 华为接口请求域名
      */
@@ -80,11 +80,6 @@ class HuaweiCloud
             $this->appSecret = $appSecret;
             //设置header头
             $this->header = $this->buildWsseHeader();
-            //设置完整请求参数
-            $this->requestData = $this->requestData();
-            if(empty($this->option)){
-                $this->option= false;
-            }
         }else{
             echo "未设置appKey或appSecret";
             die;
@@ -96,6 +91,8 @@ class HuaweiCloud
      * @return bool|\Exception|string
      */
     public function request(){
+        //设置完整请求参数
+        $this->requestData = $this->requestData();
         try{
             $response = file_get_contents($this->domian.$this->uri,false,stream_context_create($this->requestData));
             return $response;
