@@ -97,6 +97,7 @@ class HuaweiCloud
             $response = file_get_contents($this->domian.$this->uri,false,stream_context_create($this->requestData));
             return json_decode($response,true);
         }catch (\Exception $e){
+            // TODO 此处需要做处理
             return $e;
 //            echo $e->getMessage();
         }
