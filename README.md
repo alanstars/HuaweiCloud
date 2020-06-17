@@ -25,14 +25,14 @@ require_once('../vendor/autoload.php');
 返回结果已做处理，以array 数组的形式输出
 ```
 [
-            'resultcode'    =>  0,
-            'resultdesc'    =>  'Success',
-            'subscriptionId'    =>  'f36934ad-74b3-4666-85bc-05f0fbcb46f5',
-            'relationNum'   =>  '+8616558940111',
-            'callDirection' =>  0,
-            'duration'      =>  120,
-            'maxDuration'   =>  1
-        ];
+    'resultcode'        =>  0,
+    'resultdesc'        =>  'Success',
+    'subscriptionId'    =>  'f36934ad-74b3-4666-85bc-05f0fbcb46f5',
+    'relationNum'       =>  '+8616558940111',
+    'callDirection'     =>  0,
+    'duration'          =>  120,
+    'maxDuration'       =>  1
+];
 ```
 
 ## 具体返回值请查看官方接口
