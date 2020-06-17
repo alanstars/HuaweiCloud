@@ -78,8 +78,7 @@ class HuaweiCloud
         if(!empty($appKey) && !empty($appSecret)){
             $this->appKey = $appKey;
             $this->appSecret = $appSecret;
-            //设置header头
-            $this->header = $this->buildWsseHeader();
+
         }else{
             return ['resultcode'=>4001,"resultdesc"=>'appKey或appSecret为空'];
             die;
@@ -109,6 +108,8 @@ class HuaweiCloud
      * @return array
      */
     private function requestData(){
+        //设置header头
+        $this->header = $this->buildWsseHeader();
         $data = [
             'http' => [
                 'method' => 'POST', // 请求方法为POST
