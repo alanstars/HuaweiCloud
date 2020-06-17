@@ -15,8 +15,8 @@
 require_once('../vendor/autoload.php');
 $data = [
     "callerNum" =>  "+8618600881111",   //A号码
-    "relationNum"   =>  "16558942222",    //若指定X号码，areaCode将失效
-    "areaCode"  =>  "北京",   //若不指定号码，将从指定的城市中随机选择
+    "relationNum"   =>  "+8616558942222",    //若指定X号码，areaCode将失效
+    "areaCode"  =>  "010",   //若不指定号码，将从指定的城市中随机选择
     "areaMatchMode" => 0,   //号码筛选方式,携带该参数时，必须同时携带areaCode
     "calleeNum" =>  "+861861111753333", // B号码
     "callDirection" => 0,   //表示该绑定关系允许的呼叫方向,0:默认双方都可发起呼叫；1:只允许A呼叫B；2:只允许B呼叫A

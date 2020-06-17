@@ -15,7 +15,11 @@
 
 namespace CoolElephant\HuaweiYun;
 
-
+/**
+ * 封装华为云请求方法，适用于华为云全部产品，具体使用方法查看示例
+ * Class HuaweiCloud
+ * @package CoolElephant\HuaweiYun
+ */
 class HuaweiCloud
 {
     /**
@@ -38,14 +42,14 @@ class HuaweiCloud
      * 请求body数据，即请求参数
      * @var null
      */
-    private $data = null;
+    private $data = [];
     /**
-     * 请求接口
+     * 请求接口,不含domain
      * @var null
      */
     private $uri = null;
     /**
-     * 额外设置
+     * 额外设置，是否安全设置
      * @var null
      */
     private $option = false;
@@ -57,7 +61,7 @@ class HuaweiCloud
     /**
      * Version of HuaweiCloud
      */
-    const VERSION = '1.0.3';
+    const VERSION = '1.0.5';
     /**
      * 华为接口请求域名
      */
