@@ -4,7 +4,7 @@
     "keywords": ["Huawei cloud SDK","Huawei cloud API","华为云SDK","华为云API"],
     "type": "library",
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "ext-fileinfo": "*",
         "ext-openssl": "*"
     },

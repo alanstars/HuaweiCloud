@@ -127,8 +127,8 @@ class HuaweiCloud
         }
         $data = [
             'http' => [
-                'method' => $this->method, // 请求方法为POST
-                'header' => $this->header,
+                'method' => $this->method, // 请求方法
+                'header' => $this->header,  //请求头部
                 'content' => json_encode($this->data),
                 'ignore_errors' => true // 返回json格式
             ],

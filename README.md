@@ -9,7 +9,7 @@ composer require coolelephant/huaweicloud
 本方法支持命名空间，如您的项目支持自动加载，直接实例化即可
 ```
 $huaweiCloud = new \CoolElephant\HuaweiYun\HuaweiCloud('a1d1f50cad21415fbdd13d8f53d36d60','cfc881cc704c4fba8d8fef5788e03e6b');
-$response = $huaweiCloud->option(['ignore_errors'=>true,'ssl'=>false])
+$response = $huaweiCloud->option(true)
                         ->uri('/rest/caas/relationnumber/partners/v1.0')
                         ->method('POST')
                         ->data(['relationNum' => 1888888888,'callerNum' => 18666666666])
