@@ -96,11 +96,16 @@ class HuaweiCloud
     public function request(){
         //设置完整请求参数
         $this->requestData = $this->requestData();
-        if(empty($this->requestData['http']['method'])){
-            $this->requestData['http']['method'] = $this->method;
+        switch ($this->method){
+            case 'GET':
+            case 'DELETE':
+                $url = $this->domian.$this->uri .'?'.http_build_query($this->data);
+                break;
+            default:
+                $url = $this->domian.$this->uri;
         }
         try{
-            $response = file_get_contents($this->domian.$this->uri,false,stream_context_create($this->requestData));
+            $response = file_get_contents($url,false,stream_context_create($this->requestData));
             return json_decode($response,true);
         }catch (\Exception $e){
             // TODO 此处需要做处理
@@ -117,6 +122,9 @@ class HuaweiCloud
     private function requestData(){
         //设置header头
         $this->header = $this->buildWsseHeader();
+        if(empty($this->method)){
+            return ['resultcode'=>4001,"resultdesc"=>'请求method不能为空'];
+        }
         $data = [
             'http' => [
                 'method' => $this->method, // 请求方法为POST
@@ -170,9 +178,6 @@ class HuaweiCloud
      * @return $this
      */
     public function method($method){
-        if(empty($method)){
-            return ['resultcode'=>4001,"resultdesc"=>'请求method不能为空'];
-        }
         $this->method = $method;
         return $this;
     }
