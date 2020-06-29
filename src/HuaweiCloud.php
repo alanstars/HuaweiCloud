@@ -37,7 +37,7 @@ class HuaweiCloud
      * 请求方法：POST,GET,DELETE,PUT等
      * @var null
      */
-    private $method = "POST";
+    private $method = null;
     /**
      * 请求body数据，即请求参数
      * @var null
@@ -96,6 +96,9 @@ class HuaweiCloud
     public function request(){
         //设置完整请求参数
         $this->requestData = $this->requestData();
+        if(empty($this->requestData['http']['method'])){
+            $this->requestData['http']['method'] = $this->method;
+        }
         try{
             $response = file_get_contents($this->domian.$this->uri,false,stream_context_create($this->requestData));
             return json_decode($response,true);
@@ -116,7 +119,7 @@ class HuaweiCloud
         $this->header = $this->buildWsseHeader();
         $data = [
             'http' => [
-                'method' => 'POST', // 请求方法为POST
+                'method' => $this->method, // 请求方法为POST
                 'header' => $this->header,
                 'content' => json_encode($this->data),
                 'ignore_errors' => true // 返回json格式
@@ -167,6 +170,9 @@ class HuaweiCloud
      * @return $this
      */
     public function method($method){
+        if(empty($method)){
+            return ['resultcode'=>4001,"resultdesc"=>'请求method不能为空'];
+        }
         $this->method = $method;
         return $this;
     }
