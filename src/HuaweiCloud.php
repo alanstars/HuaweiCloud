@@ -153,7 +153,7 @@ class HuaweiCloud
     private function buildWsseHeader()
     {
         if(!empty($this->appKey) && !empty($this->appSecret)){
-            date_default_timezone_set("UTC");
+//            date_default_timezone_set("UTC");
             $time = date('Y-m-d\TH:i:s\Z');
             $nonce = uniqid();
             $signature = base64_encode(hash('sha256',($nonce.$time.$this->appSecret),true));
