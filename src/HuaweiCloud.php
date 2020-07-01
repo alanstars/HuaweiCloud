@@ -112,7 +112,31 @@ class HuaweiCloud
             return $e;
 //            echo $e->getMessage();
         }
+    }
 
+    /**
+     * 请求获取远程文件下载路径
+     * @return array|\Exception
+     */
+    public function requestFiles(){
+        //设置完整请求参数
+        $this->requestData = $this->requestData();
+        switch ($this->method){
+            case 'GET':
+            case 'DELETE':
+                $url = $this->domian.$this->uri .'?'.http_build_query($this->data);
+                break;
+            default:
+                $url = $this->domian.$this->uri;
+        }
+        try{
+            $response = get_headers($url,1,stream_context_create($this->requestData));
+            return $response;
+        }catch (\Exception $e){
+            // TODO 此处需要做处理
+            return $e;
+//            echo $e->getMessage();
+        }
     }
 
     /**
