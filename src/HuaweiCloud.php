@@ -121,6 +121,8 @@ class HuaweiCloud
     public function requestFiles(){
         //设置完整请求参数
         $this->requestData = $this->requestData();
+        //关闭重定向
+        $this->requestData['http']['max_redirects'] = 0;
         switch ($this->method){
             case 'GET':
             case 'DELETE':
